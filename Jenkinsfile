@@ -3,21 +3,16 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                echo 'Source code is managed by Jenkins from GitHub'
-            }
-        }
-
         stage('Build') {
             steps {
-                bat 'mvn clean package'
+                sh 'chmod +x mvnw'
+                sh './mvnw clean package'
             }
         }
 
-        stage('List Files') {
+        stage('Verify') {
             steps {
-                bat 'dir'
+                sh 'ls -la target'
             }
         }
     }
