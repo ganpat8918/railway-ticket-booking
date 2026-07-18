@@ -22,10 +22,19 @@ pipeline {
             }
         }
 
-        stage('Verify Image') {
+        stage('Verify Docker Image') {
             steps {
-                sh 'docker images'
+                sh 'docker images | grep railway-ticket-app'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'CI Build Successful!'
+        }
+        failure {
+            echo 'CI Build Failed!'
         }
     }
 }
