@@ -9,14 +9,6 @@ pipeline {
             }
         }
 
-        stage('Verify Environment') {
-            steps {
-                sh 'java -version'
-                sh 'git --version'
-                sh 'ls -la'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'chmod +x mvnw'
@@ -24,9 +16,15 @@ pipeline {
             }
         }
 
-        stage('Verify Artifact') {
+        stage('Build Docker Image') {
             steps {
-                sh 'ls -la target'
+                sh 'docker build -t railway-ticket-app:latest .'
+            }
+        }
+
+        stage('Verify Image') {
+            steps {
+                sh 'docker images'
             }
         }
     }
