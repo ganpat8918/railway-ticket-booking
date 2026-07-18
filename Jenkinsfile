@@ -13,7 +13,6 @@ pipeline {
             steps {
                 sh 'java -version'
                 sh 'git --version'
-                sh 'pwd'
                 sh 'ls -la'
             }
         }
