@@ -3,6 +3,21 @@ pipeline {
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Verify Environment') {
+            steps {
+                sh 'java -version'
+                sh 'git --version'
+                sh 'pwd'
+                sh 'ls -la'
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'chmod +x mvnw'
@@ -10,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Verify') {
+        stage('Verify Artifact') {
             steps {
                 sh 'ls -la target'
             }
